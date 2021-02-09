@@ -1,0 +1,29 @@
+/*system header*/
+#include "Main.h"
+#include "Renderer.h"
+#include "Manager.h"
+/*tools header*/
+/*scenes header*/
+/*gameobjects header*/
+/*self header*/
+
+
+//	XMFLOAT3 example;
+//	//赋值, XMFLOAT3只存储值
+//	example = XMFLOAT3(0.0f, 0.0f, 0.0f);
+//
+//	//计算, XMVECTOR类型才可以计算
+//	XMVECTOR cal = XMLoadFloat3(&example);//载入XMFLOAT3的值
+//	cal += XMVectorSet(1.0f, 1.0f, 1.0f, 0.0f);
+//	//将 XMVECTOR 赋值给 XMFLOAT3
+//	XMStoreFloat3(&example, cal);
+//
+//	//======================
+//	XMFLOAT4X4 world;
+//	XMMATRIX I = XMMatrixIdentity();
+//	//将矩阵存储为XMFLOAT4X4
+//	XMStoreFloat4x4(&world, I);
+//	//将XMFLOAT4X4读入矩阵
+//	XMMATRIX matrix = XMLoadFloat4x4(&world);
+//
+//	reinterpret_cast<D3DXMATRIX*>(&world);

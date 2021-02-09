@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{5d436ff8-e2e8-43b3-8f8b-76d84589fc20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{a60c3779-23c5-4475-82ca-6b14dbd49dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{87c45f91-9d55-413a-9f25-42e4397515b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tool">
+      <UniqueIdentifier>{c5138618-5b9d-4be2-b3bf-6bb2159301e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{f22bc6a8-1800-440a-b9eb-60231207416f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{92872636-ff8b-4d14-814d-9e0c685a0559}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="d3dUtil.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="DXTrace.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSTextureLoader.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="d3dUtil.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="DXTrace.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DDSTextureLoader.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Memo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="2DVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="2DPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
