@@ -2,22 +2,6 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 
-//class Input
-//{
-//private:
-//	static BYTE m_OldKeyState[256];
-//	static BYTE m_KeyState[256];
-//
-//public:
-//	static void Init();
-//	static void Uninit();
-//	static void Update();
-//
-//	static bool GetKeyPress( BYTE KeyCode );
-//	static bool GetKeyTrigger( BYTE KeyCode );
-//
-//};
-
 using KeyCode = DirectX::Keyboard::Keys;
 
 class Input
@@ -27,6 +11,9 @@ public:
 	static void PreUpdate();
 	static void PostUpdate();
 	static void SetMouseMode(int mode);
+
+	static DirectX::XMFLOAT3 GetMousePosition();
+	static DirectX::XMFLOAT2 GetMouseScrollDelta();
 
 	static bool GetMouseButtonDown(int n);
 	static bool GetMouseButtonUp(int n);

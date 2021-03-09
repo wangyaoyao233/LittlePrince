@@ -1,43 +1,6 @@
 #include "main.h"
 #include "Input.h"
 
-//BYTE Input::m_OldKeyState[256];
-//BYTE Input::m_KeyState[256];
-//
-//
-//void Input::Init()
-//{
-//
-//	memset( m_OldKeyState, 0, 256 );
-//	memset( m_KeyState, 0, 256 );
-//
-//}
-//
-//void Input::Uninit()
-//{
-//
-//
-//}
-//
-//void Input::Update()
-//{
-//
-//	memcpy( m_OldKeyState, m_KeyState, 256 );
-//
-//	GetKeyboardState( m_KeyState );
-//
-//}
-//
-//bool Input::GetKeyPress(BYTE KeyCode)
-//{
-//	return (m_KeyState[KeyCode] & 0x80);
-//}
-//
-//bool Input::GetKeyTrigger(BYTE KeyCode)
-//{
-//	return ((m_KeyState[KeyCode] & 0x80) && !(m_OldKeyState[KeyCode] & 0x80));
-//}
-
 DirectX::Mouse::State Input::m_MouseState{};
 DirectX::Mouse::State Input::m_LastMouseState{};
 DirectX::Mouse::ButtonStateTracker Input::m_MouseTracker{};
@@ -73,6 +36,9 @@ void Input::PostUpdate()
 	m_LastMouseState = m_MouseTracker.GetLastState();
 
 	m_LastKBState = m_KBTracker.GetLastState();
+
+	//清空滚轮积累值
+	Mouse::Get().ResetScrollWheelValue();
 }
 
 // 0 - MODE_ABSOLUTE
@@ -83,6 +49,22 @@ void Input::SetMouseMode(int mode)
 		Mouse::Get().SetMode(Mouse::Mode::MODE_ABSOLUTE);
 	if (mode == 1)
 		Mouse::Get().SetMode(Mouse::Mode::MODE_RELATIVE);
+}
+
+DirectX::XMFLOAT3 Input::GetMousePosition()
+{
+	return DirectX::XMFLOAT3(m_MouseState.x,m_MouseState.y, 0.0f);
+}
+
+DirectX::XMFLOAT2 Input::GetMouseScrollDelta()
+{
+	float y = 0.0f;
+	if (m_MouseState.scrollWheelValue > 0)
+		y = 1.0f;
+	else if (m_MouseState.scrollWheelValue < 0)
+		y = -1.0f;
+
+	return DirectX::XMFLOAT2(0.0f,y);
 }
 
 // 0 - LEFTBUTTON
