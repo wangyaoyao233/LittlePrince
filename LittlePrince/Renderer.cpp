@@ -23,6 +23,8 @@ ComPtr<ID3D11Buffer> Renderer::m_WorldBuffer;
 ComPtr<ID3D11Buffer> Renderer::m_ViewBuffer;
 ComPtr<ID3D11Buffer> Renderer::m_ProjectionBuffer;
 ComPtr<ID3D11Buffer> Renderer::m_MaterialBuffer;
+ComPtr<ID3D11Buffer> Renderer::m_CameraBuffer;
+ComPtr<ID3D11Buffer> Renderer::m_ParameterBuffer;
 
 ComPtr<ID3D11SamplerState> Renderer::m_pSamplerState;// 采样器
 
@@ -31,7 +33,7 @@ UINT Renderer::m_4xMsaaQuality;
 
 bool Renderer::Init()
 {
-	CoInitialize(nullptr);
+	CoInitialize(nullptr); // WICTextureLoader
 
 	HRESULT hr = S_OK;
 
@@ -324,6 +326,17 @@ void Renderer::SetProjectionMatrix(XMMATRIX ProjectionMatrix)
 	m_ImmediateContext->UpdateSubresource(m_ProjectionBuffer.Get(), 0, nullptr, &ProjectionMatrix, 0, 0);
 }
 
+void Renderer::SetCameraPosition(XMFLOAT3 CameraPos)
+{
+	XMFLOAT4 pos(CameraPos.x, CameraPos.y, CameraPos.z, 1.0f);
+	m_ImmediateContext->UpdateSubresource(m_CameraBuffer.Get(), 0, nullptr, &pos, 0, 0);
+}
+
+void Renderer::SetParameter(XMFLOAT4 Parameter)
+{
+	m_ImmediateContext->UpdateSubresource(m_ParameterBuffer.Get(), 0, nullptr, &Parameter, 0, 0);
+}
+
 void Renderer::SetMaterial(MATERIAL& Material)
 {
 	m_ImmediateContext->UpdateSubresource(m_MaterialBuffer.Get(), 0, nullptr, &Material, 0, 0);
@@ -348,8 +361,6 @@ void Renderer::CreateVertexShader(ID3D11VertexShader** vertexShader, ID3D11Input
 		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 6, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 10, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TANGENT",  0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "BINORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 16, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 	UINT numElements = ARRAYSIZE(layout);
 	m_D3DDevice->CreateInputLayout(layout, numElements, buffer, fsize, vertexLayout);
@@ -373,16 +384,6 @@ void Renderer::CreatePixelShader(ID3D11PixelShader** pixelShader, std::wstring f
 	delete[] buffer;
 }
 
-ComPtr<ID3D11Device> Renderer::GetDevice()
-{
-	return m_D3DDevice;
-}
-
-ComPtr<ID3D11DeviceContext> Renderer::GetDeviceContext()
-{
-	return m_ImmediateContext;
-}
-
 void Renderer::CreateConstantBuffer()
 {
 	// 设置常量缓冲区描述
@@ -397,21 +398,33 @@ void Renderer::CreateConstantBuffer()
 	cbd.CPUAccessFlags = 0;
 
 	cbd.ByteWidth = sizeof(XMMATRIX);
-
 	// 新建常量缓冲区
-	//WorldBuffer--> b0
+	// WorldBuffer--> b0
 	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_WorldBuffer.GetAddressOf());
 	m_ImmediateContext->VSSetConstantBuffers(0, 1, m_WorldBuffer.GetAddressOf());
-	//ViewBuffer--> b1
+	// ViewBuffer--> b1
 	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_ViewBuffer.GetAddressOf());
 	m_ImmediateContext->VSSetConstantBuffers(1, 1, m_ViewBuffer.GetAddressOf());
-	//ProjectionBuffer--> b2
+	// ProjectionBuffer--> b2
 	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_ProjectionBuffer.GetAddressOf());
 	m_ImmediateContext->VSSetConstantBuffers(2, 1, m_ProjectionBuffer.GetAddressOf());
 
-	//MaterialBuffer--> b3
+	// MaterialBuffer--> b3
 	cbd.ByteWidth = sizeof(MATERIAL);
 	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_MaterialBuffer.GetAddressOf());
 	m_ImmediateContext->VSSetConstantBuffers(3, 1, m_MaterialBuffer.GetAddressOf());
 	m_ImmediateContext->PSSetConstantBuffers(3, 1, m_MaterialBuffer.GetAddressOf());
+
+	// CameraBuffer--> b4
+	cbd.ByteWidth = sizeof(XMFLOAT4);
+	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_CameraBuffer.GetAddressOf());
+	m_ImmediateContext->VSSetConstantBuffers(4, 1, m_CameraBuffer.GetAddressOf());
+	m_ImmediateContext->PSSetConstantBuffers(4, 1, m_CameraBuffer.GetAddressOf());
+
+	// Parameter--> b5
+	cbd.ByteWidth = sizeof(XMFLOAT4);
+	m_D3DDevice->CreateBuffer(&cbd, nullptr, m_ParameterBuffer.GetAddressOf());
+	m_ImmediateContext->VSSetConstantBuffers(5, 1, m_ParameterBuffer.GetAddressOf());
+	m_ImmediateContext->PSSetConstantBuffers(5, 1, m_ParameterBuffer.GetAddressOf());
+
 }

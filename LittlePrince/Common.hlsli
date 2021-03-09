@@ -1,17 +1,4 @@
 
-cbuffer WorldBuffer : register(b0)
-{
-    matrix World;
-}
-cbuffer ViewBuffer : register(b1)
-{
-    matrix View;
-}
-cbuffer ProjectionBuffer : register(b2)
-{
-    matrix Projection;
-}
-
 struct VS_IN
 {
     float4 Position : POSITION0;
@@ -39,7 +26,30 @@ struct MATERIAL
     float3 Dummy;
 };
 
+cbuffer WorldBuffer : register(b0)
+{
+    matrix World;
+}
+cbuffer ViewBuffer : register(b1)
+{
+    matrix View;
+}
+cbuffer ProjectionBuffer : register(b2)
+{
+    matrix Projection;
+}
+
 cbuffer MaterialBuffer : register(b3)
 {
     MATERIAL Material;
+}
+
+cbuffer CameraBuffer : register(b4)
+{
+    float4 CameraPos;
+}
+
+cbuffer ParameterBuffer : register(b5)
+{
+    float4 Para1;
 }

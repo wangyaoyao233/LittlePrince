@@ -63,6 +63,27 @@
     <ClInclude Include="Polygon.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationModel.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshField.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="LightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="d3dUtil.cpp">
@@ -104,6 +125,24 @@
     <ClCompile Include="Polygon.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationModel.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshField.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Memo.txt" />
@@ -112,12 +151,21 @@
     <None Include="Common.hlsli">
       <Filter>Shader</Filter>
     </None>
+    <None Include="LightHelper.hlsli">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="2DVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="2DPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="LightVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="LightPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

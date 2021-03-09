@@ -20,17 +20,17 @@ void CPolygon::Init()
 	vertex[0].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
-	vertex[1].Position = XMFLOAT3(400.0f, 0.0f, 0.0f);
+	vertex[1].Position = XMFLOAT3(50.0f, 0.0f, 0.0f);
 	vertex[1].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 	vertex[1].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 
-	vertex[2].Position = XMFLOAT3(0.0f, 400.0f, 0.0f);
+	vertex[2].Position = XMFLOAT3(0.0f, 50.0f, 0.0f);
 	vertex[2].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 	vertex[2].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = XMFLOAT2(0.0f, 1.0f);
 
-	vertex[3].Position = XMFLOAT3(400.0f, 400.0f, 0.0f);
+	vertex[3].Position = XMFLOAT3(50.0f, 50.0f, 0.0f);
 	vertex[3].Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
 	vertex[3].Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
@@ -51,7 +51,7 @@ void CPolygon::Init()
 	Renderer::CreateVertexShader(m_VertexShader.GetAddressOf(), m_VertexLayout.GetAddressOf(), L"HLSL/2DVS.cso");
 	Renderer::CreatePixelShader(m_PixelShader.GetAddressOf(), L"HLSL/2DPS.cso");
 
-	CreateWICTextureFromFile(Renderer::GetDevice().Get(), L"./Asset/Texture/Fire001.bmp", nullptr, m_Texture.GetAddressOf());
+	CreateWICTextureFromFile(Renderer::GetDevice().Get(), L"Asset/Texture/green_lowpoly.png", nullptr, m_Texture.GetAddressOf());
 	assert(m_Texture);
 }
 

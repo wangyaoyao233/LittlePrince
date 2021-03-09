@@ -9,6 +9,9 @@ HWND g_Window;
 const WCHAR* CLASS_NAME = L"AppClass";
 const WCHAR* WINDOW_NAME = L"DX11Game";
 
+std::unique_ptr<Mouse> m_Mouse;
+std::unique_ptr<Keyboard> m_Keyboard;
+
 HWND GetWindow()
 {
 	return g_Window;
@@ -19,6 +22,9 @@ void OtherInit()
 {
 	/*GameTimer Init*/
 	GameTimer::Reset();
+
+	m_Mouse = std::make_unique<Mouse>();
+	m_Keyboard = std::make_unique<Keyboard>();
 }
 
 void OtherUpdate()
@@ -116,7 +122,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				// 描画処理
 				Manager::Draw();
 			}
+
+
+
 		}
+
 	}
 
 	timeEndPeriod(1);				// 分解能を戻す
@@ -141,17 +151,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		break;
 
-		//case WM_KEYDOWN:
-		//	switch (wParam)
-		//	{
-		//	case VK_ESCAPE:
-		//		DestroyWindow(hWnd);
-		//		break;
-		//	}
-		//	break;
-
-
-		// 监测这些鼠标事件
+	// 监测这些鼠标事件
 	case WM_INPUT:
 
 	case WM_LBUTTONDOWN:
@@ -167,7 +167,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEWHEEL:
 	case WM_MOUSEHOVER:
 	case WM_MOUSEMOVE:
-		//g_Mouse->ProcessMessage(uMsg, wParam, lParam);
 		DirectX::Mouse::ProcessMessage(uMsg, wParam, lParam);
 		return 0;
 
@@ -185,7 +184,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_ACTIVATEAPP:
-		//g_Mouse->ProcessMessage(uMsg, wParam, lParam);
 		DirectX::Mouse::ProcessMessage(uMsg, wParam, lParam);
 		DirectX::Keyboard::ProcessMessage(uMsg, wParam, lParam);
 		return 0;
